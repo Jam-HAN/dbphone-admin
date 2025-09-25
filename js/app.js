@@ -4,7 +4,6 @@
   const cfg = window.DBP_CONFIG || {};
   const API = cfg.API_BASE || "";
   const AUTH_KEY = cfg.AUTH_KEY || "";
-
   const headers = AUTH_KEY ? { "Authorization": "Bearer " + AUTH_KEY } : {};
 
   function fmt(n){
@@ -14,15 +13,38 @@
     return num.toLocaleString();
   }
 
+  // REST처럼 보이는 경로를 Apps Script의 ?action=… 쿼리로 변환
+  function toQuery(path){
+    const [p, qs] = path.split("?");
+    const params = new URLSearchParams(qs || "");
+    let action = "";
+    if (p === "/inventory/summary") action = "inventory.summary";
+    else if (p === "/activation/summary") action = "activation.summary";
+    else if (p === "/activation/recent") action = "activation.recent";
+    else if (p === "/tasks/pending") action = "tasks.pending";
+    else if (p === "/inventory/intake") action = "inventory.intake";
+    else throw new Error("Unknown path: " + p);
+
+    const q = new URLSearchParams();
+    q.set("action", action);
+    // 기존 쿼리파라미터(예: limit) 그대로 전달
+    for (const [k,v] of params.entries()) q.set(k, v);
+    return "?" + q.toString();
+  }
+
   async function apiGet(path){
-    const url = API + path;
+    const url = API + toQuery(path);
     const res = await fetch(url, { method: "GET", headers });
     if (!res.ok) throw new Error("GET " + path + " → " + res.status);
     return res.json();
   }
   async function apiPost(path, body){
-    const url = API + path;
-    const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(body||{}) });
+    const url = API + toQuery(path);
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...headers },
+      body: JSON.stringify(body||{})
+    });
     if (!res.ok) throw new Error("POST " + path + " → " + res.status);
     return res.json();
   }
