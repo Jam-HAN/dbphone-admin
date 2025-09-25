@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>대박통신 관리자</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="config.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">DB</div>
+    <div class="title">대박통신 관리자 — 운영 대시보드</div>
+    <button id="btn-refresh" class="btn">새로고침</button>
+  </header>
+
+  <main class="container">
+    <section class="card hero">
+      <div>
+        <h1>운영 대시보드</h1>
+        <p>입고 · 개통 · 이관 · 반품 — 데이터는 시트, 배포는 깃허브.</p>
+      </div>
+      <nav class="quick-actions">
+        <button class="qa" data-target="#intake">입고(바코드)</button>
+        <button class="qa" data-note="개통 처리 화면 연결">개통 처리</button>
+        <button class="qa" data-note="재고 이동 화면 연결">재고 이동</button>
+        <button class="qa" data-note="반품 처리 화면 연결">반품 처리</button>
+        <button class="qa" data-note="거래처/지점 설정 화면 연결">거래처/지점 설정</button>
+        <button class="qa" data-note="환경설정 화면 연결">환경설정</button>
+      </nav>
+    </section>
+
+    <section class="grid kpis">
+      <div class="card kpi">
+        <div class="kpi-title">총 재고</div>
+        <div class="kpi-value" id="kpi-total">-</div>
+        <div class="kpi-foot" id="kpi-io">-</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-title">오늘 개통</div>
+        <div class="kpi-value" id="kpi-activation-today">-</div>
+        <div class="kpi-foot" id="kpi-activation-sub">-</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-title">로우 스톡</div>
+        <div class="kpi-value" id="kpi-low">-</div>
+        <div class="kpi-foot">최소수량 이하 모델</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-title">담당자 TOP</div>
+        <div class="kpi-value" id="kpi-top-agent">-</div>
+        <div class="kpi-foot" id="kpi-top-count"></div>
+      </div>
+    </section>
+
+    <section class="card" id="intake">
+      <h2>입고(바코드) 빠른 등록</h2>
+      <div class="form-row">
+        <input id="vendor" class="input" placeholder="거래처" />
+        <input id="branch" class="input" placeholder="입고지점" />
+        <input id="barcode" class="input wide" placeholder="바코드 스캔/입력 후 Enter" />
+        <button id="btn-intake" class="btn secondary">등록</button>
+      </div>
+      <div id="intake-msg" class="msg"></div>
+      <div id="intake-parsed" class="parsed"></div>
+    </section>
+
+    <section class="grid tables">
+      <div class="card">
+        <h2>최근 개통 20건</h2>
+        <div class="table-wrap">
+          <table id="tbl-recent" class="table">
+            <thead>
+              <tr>
+                <th>처리일자</th><th>이름</th><th>전화</th><th>모델명</th><th>요금제</th><th>처리자</th><th>상태</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>처리 대기 작업</h2>
+        <div class="table-wrap">
+          <table id="tbl-pending" class="table">
+            <thead>
+              <tr>
+                <th>생성일</th><th>유형</th><th>제목</th><th>담당</th><th>상태</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">© <span id="year"></span> DBPhone — 시트 연결형 운영 대시보드</footer>
+  </main>
+</body>
+</html>

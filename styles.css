@@ -1,0 +1,29 @@
+*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans KR,Arial,sans-serif;background:#fafafa;color:#111}
+.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #e5e7eb;background:rgba(255,255,255,.75);backdrop-filter:saturate(1.2) blur(6px)}
+.brand{width:36px;height:36px;border-radius:12px;background:#111;color:#fff;display:grid;place-items:center;font-weight:700}
+.title{font-weight:600}
+.btn{padding:8px 12px;border:1px solid #e5e7eb;border-radius:12px;background:#fff;cursor:pointer}
+.btn:hover{background:#f6f6f6}
+.btn.secondary{background:#111;color:#fff;border-color:#111}
+.container{max-width:1160px;margin:0 auto;padding:16px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.hero{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.quick-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.qa{border:1px solid #e5e7eb;border-radius:14px;padding:10px;background:#fff;cursor:pointer;text-align:left}
+.qa:hover{background:#f6f6f6}
+.grid.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.kpi-title{color:#6b7280;font-size:12px}
+.kpi-value{font-size:24px;font-weight:700;margin-top:6px}
+.kpi-foot{color:#6b7280;font-size:12px;margin-top:2px}
+.form-row{display:grid;grid-template-columns:1fr 1fr 2fr auto;gap:8px}
+.input{border:1px solid #e5e7eb;border-radius:12px;padding:10px}
+.input.wide{grid-column:span 1}
+.msg{margin-top:8px;font-size:14px}
+.parsed{margin-top:6px;font-size:14px;color:#374151}
+.grid.tables{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.table-wrap{max-height:360px;overflow:auto;border:1px solid #e5e7eb;border-radius:12px}
+.table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
+.table thead th{position:sticky;top:0;background:#f9fafb;text-align:left;padding:8px;border-bottom:1px solid #e5e7eb}
+.table tbody td{padding:8px;border-top:1px solid #f3f4f6}
+.footer{text-align:center;color:#6b7280;font-size:12px;margin:24px 0}
+@media (max-width:900px){.grid.kpis{grid-template-columns:repeat(2,1fr)}.grid.tables{grid-template-columns:1fr}.form-row{grid-template-columns:1fr 1fr 1fr auto}.quick-actions{grid-template-columns:1fr 1fr}}
